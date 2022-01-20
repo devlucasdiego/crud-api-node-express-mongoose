@@ -1,9 +1,9 @@
-// configs
+// CONFIG INICIAL
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 
-//ler JSON / middlewares
+// ler JSON / middlewares
 app.use(
     express.urlencoded({
         extended: true
@@ -12,25 +12,18 @@ app.use(
 
 app.use(express.json())
 
-// rota inicial / endpoint
-app.get('/', (req, res) => {
+const personRoutes = require('./routes/personRoutes')
 
-    //mostrar req
+app.use('/person', personRoutes)
 
-    res.json({
-        message: 'Hi Express!'
-    })
-
-})
-
-// dotenv
+// DOTENV
 require('dotenv').config()
 
 const DB_HOST = process.env.DB_HOST
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 
-// conexão mongodb
+// CONEXÃO MongoDB
 mongoose
     .connect(
         process.env.DB_HOST
