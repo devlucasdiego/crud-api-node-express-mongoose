@@ -1,5 +1,6 @@
 // configs
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 
 //ler JSON / middlewares
@@ -22,5 +23,20 @@ app.get('/', (req, res) => {
 
 })
 
-// entregar porta
-app.listen(3000)
+// dotenv
+require('dotenv').config()
+
+const DB_HOST = process.env.DB_HOST
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = process.env.DB_PASSWORD
+
+// conexão mongodb
+mongoose
+    .connect(
+        process.env.DB_HOST
+    )
+    .then(() => {
+        console.log('CONECTADO. MongoDB!')
+        app.listen(3000)
+    })
+    .catch((err) => console.log(err))
