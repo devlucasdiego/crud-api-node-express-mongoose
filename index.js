@@ -20,8 +20,6 @@ app.use("/person", personRoutes);
 require("dotenv").config();
 
 const DB_HOST = process.env.DB_HOST;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
 
 // CONEXÃO MongoDB
 mongoose
